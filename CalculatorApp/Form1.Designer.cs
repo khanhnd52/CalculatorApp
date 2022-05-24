@@ -63,6 +63,7 @@ namespace CalculatorApp
             this.zeroButton.TabIndex = 0;
             this.zeroButton.Text = "0";
             this.zeroButton.UseVisualStyleBackColor = true;
+            this.zeroButton.Click += new System.EventHandler(this.zeroButton_Click);
             // 
             // decimalButton
             // 
@@ -101,6 +102,8 @@ namespace CalculatorApp
             this.equalButton.TabIndex = 3;
             this.equalButton.Text = "=";
             this.equalButton.UseVisualStyleBackColor = true;
+            this.equalButton.Click += new System.EventHandler(this.equalButton_Click);
+            this.equalButton.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Calculator_KeyUp);
             // 
             // plusButton
             // 
@@ -113,6 +116,7 @@ namespace CalculatorApp
             this.plusButton.TabIndex = 7;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = true;
+            this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
             // 
             // oneButton
             // 
@@ -348,10 +352,13 @@ namespace CalculatorApp
             this.Controls.Add(this.plusMinusButton);
             this.Controls.Add(this.decimalButton);
             this.Controls.Add(this.zeroButton);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(688, 950);
             this.Name = "Calculator";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Calculator_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Calculator_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Calculator_KeyUp);
             this.Resize += new System.EventHandler(this.Calculator_Resize);
             this.ResumeLayout(false);
 

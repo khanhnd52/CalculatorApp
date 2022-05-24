@@ -41,6 +41,7 @@ namespace CalculatorApp
         public Calculator()
         {
             InitializeComponent();
+            //KeyPreview = true;
         }
 
 
@@ -130,7 +131,7 @@ namespace CalculatorApp
             else
             {
                 if (displayLabel.Text.Equals("0") == true && displayLabel.Text != null)
-                    displayLabel.Text = num1.ToString();
+                    displayLabel.Text = numPressed.ToString();
                 else if (displayLabel.Text.Equals("-0") == true)
                     displayLabel.Text = "-" + numPressed.ToString();
                 else
@@ -138,100 +139,247 @@ namespace CalculatorApp
             }
         }
 
+        private void zeroButton_Click(object sender, EventArgs e)
+        {
+            changeLabel(0);
+        }
 
         private void oneButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(1);
         }
 
         private void twoButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(2);
         }
 
         private void threeButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(3);
         }
 
         private void fourButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(4);
         }
 
         private void fiveButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(5);
         }
 
         private void sixButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(6);
         }
 
         private void sevenButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(7);
         }
 
         private void eightButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(8);
         }
 
         private void nineButton_Click(object sender, EventArgs e)
         {
-
+            changeLabel(9);
         }
 
         private void decimalButton_Click(object sender, EventArgs e)
         {
-
+            dec = true;
+            changeLabel(0);
         }
 
         private void plusMinusButton_Click(object sender, EventArgs e)
         {
-
+            displayLabel.Text = '-' + displayLabel.Text;
         }
 
         private void squarerootButton_Click(object sender, EventArgs e)
         {
-
+            num1 = float.Parse(displayLabel.Text);
+            if(num1 > 0)
+            {
+                double sqrt = Math.Sqrt(num1);
+                displayLabel.Text = sqrt.ToString();
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            displayLabel.Text = "0";
+            num1 = 0;
+            num2 = 0;
+            result = 0;
+            operation = '\0';
+            dec = false;
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void multiplyButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void divideButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void minusButton_Click(object sender, EventArgs e)
-        {
-
+            int stringLength = displayLabel.Text.Length;
+            if (stringLength > 1)
+            {
+                displayLabel.Text = displayLabel.Text.Substring(0, stringLength - 1); //lấy chuỗi từ bên trái tới phần tử cuối cùng của chuỗi -1
+                                                                                      //arg2 là chốt để lấy đến phần tử thứ mấy
+            }
+            else
+                displayLabel.Text = "0";
         }
 
         private void plusButton_Click(object sender, EventArgs e)
         {
-
+            num1 = float.Parse(displayLabel.Text);
+            operation = '+';
+            result += num1;
+            displayLabel.Text = "";
         }
+
+        private void multiplyButton_Click(object sender, EventArgs e)
+        {
+            num1 = float.Parse(displayLabel.Text);
+            operation = '*';
+            result *= num1;
+            displayLabel.Text = "";
+        }
+
+        private void divideButton_Click(object sender, EventArgs e)
+        {
+            num1 = float.Parse(displayLabel.Text);
+            operation = '/';
+            result /= num1;
+            displayLabel.Text = "";
+        }
+
+        private void minusButton_Click(object sender, EventArgs e)
+        {
+            num1 = float.Parse(displayLabel.Text);
+            operation = '-';
+            result -= num1;
+            displayLabel.Text = "";
+        }
+
+        private void Calculator_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.NumPad1:
+                    oneButton.PerformClick();
+                    break;
+                case Keys.D1:
+                    oneButton.PerformClick();
+                    break;
+                case Keys.NumPad2:
+                    twoButton.PerformClick();
+                    break;
+                case Keys.D2:
+                    twoButton.PerformClick();
+                    break;
+                case Keys.NumPad3:
+                    threeButton.PerformClick();
+                    break;
+                case Keys.D3:
+                    threeButton.PerformClick();
+                    break;
+                case Keys.NumPad4:
+                    fourButton.PerformClick();
+                    break;
+                case Keys.D4:
+                    fourButton.PerformClick();
+                    break;
+                case Keys.NumPad5:
+                    fiveButton.PerformClick();
+                    break;
+                case Keys.D5:
+                    fiveButton.PerformClick();
+                    break;
+                case Keys.NumPad6:
+                    sixButton.PerformClick();
+                    break;
+                case Keys.D6:
+                    sixButton.PerformClick();
+                    break;
+                case Keys.NumPad7:
+                    sevenButton.PerformClick();
+                    break;
+                case Keys.D7:
+                    sevenButton.PerformClick();
+                    break;
+                case Keys.NumPad8:
+                    eightButton.PerformClick();
+                    break;
+                case Keys.D8:
+                    eightButton.PerformClick();
+                    break;
+                case Keys.NumPad9:
+                    nineButton.PerformClick();
+                    break;
+                case Keys.D9:
+                    nineButton.PerformClick();
+                    break;
+                case Keys.Divide:
+                    divideButton.PerformClick();
+                    break;
+                case Keys.Subtract:
+                    minusButton.PerformClick();
+                    break;
+                case Keys.Add:
+                    plusButton.PerformClick();
+                    break;
+                case Keys.Multiply:
+                    multiplyButton.PerformClick();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Calculator_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    equalButton.PerformClick();
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         private void equalButton_Click(object sender, EventArgs e)
         {
-
+            result = 0;
+            if(displayLabel.Text.Equals("0") == false)
+            {
+                switch (operation)
+                {
+                    case '+':
+                        num2 = float.Parse(displayLabel.Text);
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        num2 = float.Parse(displayLabel.Text);
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        num2 = float.Parse(displayLabel.Text);
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        num2 = float.Parse(displayLabel.Text);
+                        result = num1 / num2;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            displayLabel.Text = result.ToString();
         }
 
     }
